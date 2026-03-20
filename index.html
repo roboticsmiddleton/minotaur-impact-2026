@@ -49,7 +49,6 @@
     position: relative; text-align: center; z-index: 2;
     margin-bottom: 3.5rem; padding: 0 2rem;
   }
-
   .subtitle {
     font-size: 1rem; letter-spacing: .45em;
     color: var(--blood); text-transform: uppercase;
@@ -59,7 +58,6 @@
   @keyframes flicker {
     0%,100%{opacity:1} 92%{opacity:1} 93%{opacity:.4} 94%{opacity:1} 96%{opacity:.6} 97%{opacity:1}
   }
-
   .main-title {
     font-family: 'Cinzel Decorative', serif;
     font-size: clamp(4rem, 9vw, 7.5rem);
@@ -72,7 +70,6 @@
     0%,100%{text-shadow:0 0 24px rgba(192,57,43,.8),0 0 70px rgba(192,57,43,.4),2px 2px 0 #000}
     50%{text-shadow:0 0 50px rgba(255,34,0,1),0 0 100px rgba(192,57,43,.7),2px 2px 0 #000}
   }
-
   .tagline {
     margin-top: 1.4rem; font-size: 1.05rem;
     color: rgba(192,57,43,.6); letter-spacing: .3em; font-style: italic;
@@ -83,8 +80,7 @@
     padding: 1.35rem 4.5rem;
     min-height: 64px; min-width: 260px;
     background: transparent;
-    border: 2px solid var(--crimson);
-    color: var(--crimson);
+    border: 2px solid var(--crimson); color: var(--crimson);
     font-family: 'Cinzel Decorative', serif;
     font-size: 1.25rem; letter-spacing: .2em;
     cursor: pointer; -webkit-appearance: none;
@@ -105,7 +101,7 @@
     bottom: max(env(safe-area-inset-bottom, 0px), 2rem);
     font-size: .75rem; letter-spacing: .3em;
     color: rgba(139,0,0,.4); text-transform: uppercase;
-    animation: flicker 3s ease-in-out infinite; animation-delay: 1s;
+    animation: flicker 3s ease-in-out infinite; animation-delay:1s;
     padding: 0 2rem; text-align: center;
   }
 
@@ -130,66 +126,6 @@
     position:absolute; inset:0; width:100%; height:100%; display:block;
   }
 
-  /* ===== TAP CONTROLS ===== */
-  #controls {
-    position: fixed; inset: 0; z-index: 150;
-    display: none;
-    pointer-events: none;
-  }
-  #controls.active { display: block; pointer-events: all; }
-
-  /* Invisible tap zones */
-  .tap-zone {
-    position: absolute;
-    background: transparent;
-    /* Debug: set to rgba(255,0,0,.15) to visualise zones */
-  }
-
-  /* Forward — big centre zone */
-  #tap-forward {
-    top: 10%; left: 20%; right: 20%; bottom: 30%;
-  }
-  /* Left turn */
-  #tap-left {
-    top: 30%; left: 0; width: 20%; bottom: 30%;
-  }
-  /* Right turn */
-  #tap-right {
-    top: 30%; right: 0; width: 20%; bottom: 30%;
-  }
-  /* Back — bottom centre */
-  #tap-back {
-    bottom: 0; left: 20%; right: 20%; height: 30%;
-  }
-
-  /* Control hint overlay */
-  #control-hint {
-    position: fixed; bottom: max(env(safe-area-inset-bottom,0px),1.5rem);
-    left: 50%; transform: translateX(-50%);
-    z-index: 200; pointer-events: none;
-    display: flex; gap: 1rem; align-items: center;
-    opacity: 0; animation: hintFade 5s ease 1s forwards;
-  }
-  @keyframes hintFade { 0%{opacity:0} 15%{opacity:1} 70%{opacity:1} 100%{opacity:0} }
-
-  .hint-row {
-    display: flex; flex-direction: column; align-items: center; gap: .3rem;
-  }
-  .hint-btn {
-    width: 44px; height: 44px;
-    border: 1.5px solid rgba(192,57,43,.5);
-    display: flex; align-items: center; justify-content: center;
-    font-size: .9rem; color: rgba(192,57,43,.6);
-    clip-path: polygon(8px 0%,calc(100% - 8px) 0%,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0% calc(100% - 8px),0% 8px);
-  }
-  .hint-label {
-    font-size: .5rem; letter-spacing: .3em;
-    color: rgba(139,0,0,.5); text-transform: uppercase;
-  }
-
-  /* Active flash on tap zones */
-  .tap-zone:active { background: rgba(192,57,43,.06); }
-
   /* ===== HUD ===== */
   #hud {
     position:fixed; top:0; left:0; right:0; z-index:200;
@@ -199,7 +135,6 @@
     pointer-events:none;
   }
   #hud.hidden { display:none; }
-
   .hud-left { display:flex; flex-direction:column; gap:.25rem; }
   .hud-label { font-size:.68rem; letter-spacing:.4em; color:var(--blood); text-transform:uppercase; }
   .checkpoint-display {
@@ -207,7 +142,6 @@
     font-size:1.6rem; color:var(--crimson);
     text-shadow:0 0 18px rgba(192,57,43,.8);
   }
-
   .checkpoints-row { display:flex; gap:.65rem; align-items:center; }
   .cp-dot {
     width:40px; height:40px;
@@ -224,6 +158,46 @@
     animation:cpPop .5s ease;
   }
   @keyframes cpPop { 0%{transform:scale(.5)} 60%{transform:scale(1.35)} 100%{transform:scale(1)} }
+
+  /* ===== ARROW BUTTONS ===== */
+  #arrow-pad {
+    position: fixed;
+    bottom: max(env(safe-area-inset-bottom,0px), 2.2rem);
+    left: 50%; transform: translateX(-50%);
+    z-index: 250;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: .6rem;
+  }
+  #arrow-pad.active { display: flex; }
+
+  .arrow-row { display:flex; gap:.6rem; }
+
+  .arrow-btn {
+    width: 72px; height: 72px;
+    background: rgba(10,0,0,.75);
+    border: 2px solid rgba(192,57,43,.55);
+    color: var(--crimson);
+    font-size: 1.6rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; -webkit-appearance: none;
+    clip-path: polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px);
+    transition: background .15s, box-shadow .15s;
+    box-shadow: 0 0 12px rgba(192,57,43,.2);
+    /* spacer placeholder */
+  }
+  .arrow-btn.spacer {
+    background: transparent; border-color: transparent; box-shadow: none; pointer-events:none;
+  }
+  .arrow-btn:active, .arrow-btn.pressed {
+    background: rgba(139,0,0,.45);
+    box-shadow: 0 0 30px rgba(192,57,43,.6);
+    transform: scale(.93);
+  }
+  .arrow-btn:disabled {
+    opacity: .25; pointer-events: none;
+  }
 
   /* ===== CHECKPOINT FLASH ===== */
   #cp-flash {
@@ -264,7 +238,6 @@
     opacity:0; pointer-events:none; transition:opacity 1.5s ease;
   }
   #win-screen.show { opacity:1; pointer-events:all; }
-
   .win-particles { position:absolute; inset:0; overflow:hidden; }
   .particle {
     position:absolute; background:var(--crimson); border-radius:50%;
@@ -275,7 +248,6 @@
     0%{transform:translate(0,0) scale(1);opacity:1}
     100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}
   }
-
   .win-text-wrap { position:relative; z-index:2; text-align:center; padding:0 2.5rem; }
   .win-eyebrow {
     font-size:.92rem; letter-spacing:.65em; color:var(--blood);
@@ -318,24 +290,17 @@
     0%{transform:rotateY(-90deg) scale(0);opacity:0}
     100%{transform:rotateY(0) scale(1);opacity:1}
   }
-
   .play-again-btn {
     margin-top:3.2rem; padding:1.1rem 3rem;
     min-height:60px; min-width:220px;
     background:transparent;
-    border:2px solid rgba(192,57,43,.5);
-    color:rgba(192,57,43,.75);
+    border:2px solid rgba(192,57,43,.5); color:rgba(192,57,43,.75);
     font-family:'Cinzel',serif; font-size:1rem; letter-spacing:.3em;
-    cursor:pointer; -webkit-appearance:none;
-    transition:all .3s;
+    cursor:pointer; -webkit-appearance:none; transition:all .3s;
     clip-path:polygon(8px 0%,calc(100% - 8px) 0%,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0% calc(100% - 8px),0% 8px);
     animation:fadeInUp .8s ease 2.8s both;
   }
-  .play-again-btn:active {
-    border-color:var(--crimson); color:var(--crimson);
-    background:rgba(139,0,0,.2); transform:scale(.96);
-  }
-
+  .play-again-btn:active { border-color:var(--crimson); color:var(--crimson); background:rgba(139,0,0,.2); transform:scale(.96); }
   @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
 
   .scanlines {
@@ -349,7 +314,6 @@
     animation:fogPulse 4s ease-in-out infinite;
   }
   @keyframes fogPulse { 0%,100%{opacity:.6} 50%{opacity:1} }
-
   .torch-left,.torch-right { position:fixed; bottom:15%; z-index:200; pointer-events:none; }
   .torch-left{left:0} .torch-right{right:0}
   .torch-glow {
@@ -366,7 +330,8 @@
     .win-title { font-size:clamp(2.5rem,9vh,5rem); }
     #hud { padding:1rem 2.4rem .8rem; }
     .cp-dot { width:36px; height:36px; }
-    .checkpoint-display { font-size:1.35rem; }
+    .arrow-btn { width:62px; height:62px; font-size:1.4rem; }
+    #arrow-pad { bottom: max(env(safe-area-inset-bottom,0px), 1rem); gap:.4rem; }
   }
 </style>
 </head>
@@ -377,13 +342,11 @@
 <!-- ENTRY SCREEN -->
 <div id="entry-screen">
   <div class="entry-bg"></div>
-
   <div class="title-wrapper">
     <div class="subtitle">You have been summoned to</div>
     <div class="main-title">THE<br>LABYRINTH</div>
     <div class="tagline">where the Minotaur awaits</div>
   </div>
-
   <button class="enter-btn" ontouchstart="" onclick="enterMaze()">Enter the Maze</button>
   <div class="warning-text">Abandon all hope, ye who enter here</div>
 </div>
@@ -396,34 +359,6 @@
   <div class="torch-right"><div class="torch-glow"></div></div>
 </div>
 
-<!-- TAP CONTROLS -->
-<div id="controls">
-  <div class="tap-zone" id="tap-forward"></div>
-  <div class="tap-zone" id="tap-left"></div>
-  <div class="tap-zone" id="tap-right"></div>
-  <div class="tap-zone" id="tap-back"></div>
-</div>
-
-<!-- Control hint (fades in then out) -->
-<div id="control-hint">
-  <div class="hint-row">
-    <div class="hint-btn">L</div>
-    <div class="hint-label">Turn Left</div>
-  </div>
-  <div class="hint-row">
-    <div class="hint-btn" style="width:80px">Fwd</div>
-    <div class="hint-label">Move Forward</div>
-  </div>
-  <div class="hint-row">
-    <div class="hint-btn">R</div>
-    <div class="hint-label">Turn Right</div>
-  </div>
-  <div class="hint-row" style="margin-left:1rem">
-    <div class="hint-btn" style="width:80px">Bck</div>
-    <div class="hint-label">Move Back</div>
-  </div>
-</div>
-
 <!-- HUD -->
 <div id="hud" class="hidden">
   <div class="hud-left">
@@ -431,6 +366,20 @@
     <div class="checkpoint-display" id="current-location">Entrance</div>
   </div>
   <div class="checkpoints-row" id="cp-row"></div>
+</div>
+
+<!-- ARROW PAD -->
+<div id="arrow-pad">
+  <div class="arrow-row">
+    <div class="arrow-btn spacer"></div>
+    <button class="arrow-btn" id="btn-forward" ontouchstart="" onclick="moveForward()">&#9650;</button>
+    <div class="arrow-btn spacer"></div>
+  </div>
+  <div class="arrow-row">
+    <button class="arrow-btn" id="btn-left"    ontouchstart="" onclick="turnLeft()">&#9664;</button>
+    <button class="arrow-btn" id="btn-back"    ontouchstart="" onclick="moveBack()">&#9660;</button>
+    <button class="arrow-btn" id="btn-right"   ontouchstart="" onclick="turnRight()">&#9654;</button>
+  </div>
 </div>
 
 <!-- Checkpoint flash -->
@@ -446,7 +395,7 @@
   <div class="win-particles" id="win-particles"></div>
   <div class="win-text-wrap">
     <div class="win-eyebrow">The Labyrinth has been conquered</div>
-    <div class="win-title">WE BEAT<br>THE MAZE</div>
+    <div class="win-title">We Beat<br>the Maze</div>
     <div class="win-sub">You have slain the Minotaur</div>
     <div class="win-checkpoints">
       <div class="win-cp">A</div><div class="win-cp">B</div><div class="win-cp">C</div>
@@ -458,11 +407,15 @@
 
 <script>
 // ============================================================
-//  3D RAYCASTER — manual tap controls
+//  POINT-TO-POINT 3D MAZE
+//  The player moves between named waypoints (checkpoints).
+//  Arrow buttons trigger a smooth animated travel to the
+//  next / previous waypoint, or turn left / right in place.
 // ============================================================
 const canvas = document.getElementById('tunnel-canvas');
 const ctx    = canvas.getContext('2d');
 
+// ---- MAP ----
 const MAP_W = 18, MAP_H = 18;
 const mapData = [
   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -485,49 +438,61 @@ const mapData = [
   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ];
 
-// Player state
-let px = 1.5, py = 1.5, angle = 0;
-
-// Input state — held flags for smooth movement
-const keys = { forward:false, back:false, left:false, right:false };
-
-const MOVE_SPEED  = 3.5;   // cells per second
-const TURN_SPEED  = 2.2;   // radians per second
-const STEP        = 0.25;  // collision margin
-
-const CHECKPOINTS = [
-  {x:4, y:1, label:'A', reached:false},
-  {x:7, y:5, label:'B', reached:false},
-  {x:1, y:9, label:'C', reached:false},
-  {x:9, y:11,label:'D', reached:false},
-  {x:15,y:13,label:'E', reached:false},
-  {x:15,y:1, label:'F', reached:false},
+// ---- WAYPOINTS ----
+// Each waypoint has a position (x,y) and the facing angle on ARRIVAL (radians).
+// 0=East +x, PI/2=South +y, PI=West, -PI/2=North
+const WAYPOINTS = [
+  { x:1.5, y:1.5, angle:0,           label:'Entrance' },  // 0 — start
+  { x:4.5, y:1.5, angle:Math.PI/2,   label:'A' },         // 1
+  { x:7.5, y:5.5, angle:Math.PI,     label:'B' },         // 2
+  { x:1.5, y:9.5, angle:-Math.PI/2,  label:'C' },         // 3
+  { x:9.5, y:11.5,angle:0,           label:'D' },         // 4
+  { x:15.5,y:13.5,angle:-Math.PI/2,  label:'E' },         // 5
+  { x:15.5,y:1.5, angle:Math.PI,     label:'F' },         // 6 — final
 ];
 
-const FOV=Math.PI/2.6, NUM_RAYS=480, MAX_DEPTH=16;
-let running=false, lastTime=0, cpReached=0, gameOver=false;
+// Current camera state (interpolated during travel)
+let camX  = WAYPOINTS[0].x;
+let camY  = WAYPOINTS[0].y;
+let camA  = WAYPOINTS[0].angle;
 
+// Which waypoint index we're currently AT (not travelling)
+let currentWP = 0;
+
+// Travel animation state
+let travelling  = false;
+let travelFrom  = null;   // { x, y, angle }
+let travelTo    = null;   // { x, y, angle }
+let travelT     = 0;      // 0..1 progress
+const TRAVEL_DUR = 1.6;   // seconds for one leg
+
+let running = false, lastTime = 0, gameOver = false;
+let cpReached = 0;
+
+// Raycaster constants
+const FOV=Math.PI/2.6, NUM_RAYS=480, MAX_DEPTH=16;
 const WN=[15,0,0],WF=[5,0,0],FLF=[8,0,0],FLN=[30,2,2],CF=[4,0,0],CN=[20,1,1];
 
 function lerp(a,b,t){return a+(b-a)*t;}
+function lerpAngle(a,b,t){
+  let d=b-a;
+  while(d>Math.PI)  d-=2*Math.PI;
+  while(d<-Math.PI) d+=2*Math.PI;
+  return a+d*t;
+}
 function lc(c1,c2,t){
   return`rgb(${Math.round(lerp(c1[0],c2[0],t))},${Math.round(lerp(c1[1],c2[1],t))},${Math.round(lerp(c1[2],c2[2],t))})`;
 }
+function easeInOut(t){ return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2; }
 
 function resize(){
   canvas.width=window.innerWidth;
   canvas.height=window.innerHeight;
 }
 
-function isWall(x,y){
-  const mx=Math.floor(x), my=Math.floor(y);
-  if(mx<0||mx>=MAP_W||my<0||my>=MAP_H) return true;
-  return mapData[my][mx]===1;
-}
-
 function castRay(ra){
   const ca=Math.cos(ra),sa=Math.sin(ra);
-  let d=0,rx=px,ry=py;
+  let d=0,rx=camX,ry=camY;
   while(d<MAX_DEPTH){
     rx+=ca*.04; ry+=sa*.04; d+=.04;
     const mx=Math.floor(rx),my=Math.floor(ry);
@@ -543,7 +508,6 @@ function castRay(ra){
 function renderFrame(){
   const W=canvas.width,H=canvas.height;
   ctx.clearRect(0,0,W,H);
-
   for(let y=0;y<H;y+=2){
     if(y<H/2){
       ctx.fillStyle=lc(CN,CF,(H/2-y)/(H/2));
@@ -553,12 +517,11 @@ function renderFrame(){
       ctx.fillRect(0,y,W,2);
     }
   }
-
   const sw=W/NUM_RAYS;
   for(let i=0;i<NUM_RAYS;i++){
-    const ra=angle-FOV/2+(i/NUM_RAYS)*FOV;
+    const ra=camA-FOV/2+(i/NUM_RAYS)*FOV;
     const{dist,side}=castRay(ra);
-    const cor=dist*Math.cos(ra-angle);
+    const cor=dist*Math.cos(ra-camA);
     const wh=Math.min(H,H/cor*.85);
     const wt=(H-wh)/2;
     const t=Math.min(1,cor/MAX_DEPTH);
@@ -575,7 +538,6 @@ function renderFrame(){
       ctx.fillRect(Math.floor(i*sw),wt,Math.ceil(sw)+1,2);
     }
   }
-
   const fog=ctx.createRadialGradient(W/2,H/2,H*.1,W/2,H/2,H*.7);
   fog.addColorStop(0,'rgba(0,0,0,0)'); fog.addColorStop(1,'rgba(0,0,0,.5)');
   ctx.fillStyle=fog; ctx.fillRect(0,0,W,H);
@@ -584,43 +546,81 @@ function renderFrame(){
   ctx.fillStyle=gl; ctx.fillRect(0,0,W,H);
 }
 
-function updatePlayer(dt){
-  if(keys.left)  angle -= TURN_SPEED * dt;
-  if(keys.right) angle += TURN_SPEED * dt;
-
-  if(keys.forward || keys.back){
-    const dir = keys.forward ? 1 : -1;
-    const nx = px + Math.cos(angle) * MOVE_SPEED * dt * dir;
-    const ny = py + Math.sin(angle) * MOVE_SPEED * dt * dir;
-    // Collision — slide along walls
-    if(!isWall(nx, py)) px = nx;
-    if(!isWall(px, ny)) py = ny;
-  }
+// ---- TRAVEL ----
+function travelTo_wp(wpIdx){
+  if(travelling || gameOver) return;
+  if(wpIdx < 0 || wpIdx >= WAYPOINTS.length) return;
+  travelFrom = { x:camX, y:camY, angle:camA };
+  travelTo   = WAYPOINTS[wpIdx];
+  travelT    = 0;
+  travelling = true;
+  setButtonsEnabled(false);
 }
 
-function checkCheckpoints(){
-  CHECKPOINTS.forEach((cp,idx)=>{
-    if(!cp.reached){
-      const dx=px-(cp.x+.5),dy=py-(cp.y+.5);
-      if(dx*dx+dy*dy<1.5){
-        cp.reached=true; cpReached++;
-        triggerCheckpoint(cp.label,idx);
-      }
-    }
+function setButtonsEnabled(on){
+  ['btn-forward','btn-back','btn-left','btn-right'].forEach(id=>{
+    const b=document.getElementById(id);
+    if(b) b.disabled = !on;
   });
 }
 
-function triggerCheckpoint(label,idx){
-  document.querySelectorAll('.cp-dot')[idx]?.classList.add('reached');
-  document.getElementById('current-location').textContent=`Checkpoint ${label}`;
-  const flash=document.getElementById('cp-flash');
-  document.getElementById('cp-flash-name').textContent=label;
-  flash.classList.remove('show'); void flash.offsetWidth; flash.classList.add('show');
-  if(cpReached===6) setTimeout(triggerWin,2600);
+// Arrow button handlers
+function moveForward(){
+  if(travelling || gameOver) return;
+  if(currentWP < WAYPOINTS.length - 1){
+    travelTo_wp(currentWP + 1);
+  }
+}
+function moveBack(){
+  if(travelling || gameOver) return;
+  if(currentWP > 0){
+    travelTo_wp(currentWP - 1);
+  }
+}
+function turnLeft(){
+  if(travelling || gameOver) return;
+  // Snap-turn 90 degrees left
+  snapTurn(-Math.PI/2);
+}
+function turnRight(){
+  if(travelling || gameOver) return;
+  snapTurn(Math.PI/2);
+}
+
+let snapFrom=null, snapTarget=null, snapT=0;
+const SNAP_DUR=0.35;
+let snapping=false;
+
+function snapTurn(delta){
+  if(snapping || travelling) return;
+  snapFrom  = camA;
+  snapTarget = camA + delta;
+  snapT     = 0;
+  snapping  = true;
+  setButtonsEnabled(false);
+}
+
+function triggerCheckpointAt(wpIdx){
+  const wp = WAYPOINTS[wpIdx];
+  if(!wp || wp.label === 'Entrance') return;
+  // Find cp index (0-5 for A-F)
+  const cpIdx = 'ABCDEF'.indexOf(wp.label);
+  if(cpIdx === -1) return;
+  const dots = document.querySelectorAll('.cp-dot');
+  if(dots[cpIdx] && !dots[cpIdx].classList.contains('reached')){
+    dots[cpIdx].classList.add('reached');
+    cpReached++;
+    document.getElementById('current-location').textContent = `Checkpoint ${wp.label}`;
+    const flash=document.getElementById('cp-flash');
+    document.getElementById('cp-flash-name').textContent=wp.label;
+    flash.classList.remove('show'); void flash.offsetWidth; flash.classList.add('show');
+    if(cpReached===6) setTimeout(triggerWin, 2600);
+  }
 }
 
 function triggerWin(){
   gameOver=true;
+  setButtonsEnabled(false);
   document.getElementById('win-screen').classList.add('show');
   const pp=document.getElementById('win-particles');
   for(let i=0;i<110;i++){
@@ -641,41 +641,40 @@ function gameLoop(ts){
   if(!running) return;
   const dt=Math.min((ts-lastTime)/1000,.05);
   lastTime=ts;
-  if(!gameOver){
-    updatePlayer(dt);
-    checkCheckpoints();
+
+  if(travelling){
+    travelT = Math.min(1, travelT + dt/TRAVEL_DUR);
+    const e = easeInOut(travelT);
+    camX = lerp(travelFrom.x, travelTo.x, e);
+    camY = lerp(travelFrom.y, travelTo.y, e);
+    camA = lerpAngle(travelFrom.angle, travelTo.angle, e);
+    if(travelT >= 1){
+      // Arrived
+      camX = travelTo.x; camY = travelTo.y; camA = travelTo.angle;
+      currentWP = WAYPOINTS.indexOf(travelTo);
+      travelling = false;
+      setButtonsEnabled(true);
+      // Update HUD location label
+      const lbl = WAYPOINTS[currentWP].label;
+      document.getElementById('current-location').textContent =
+        lbl === 'Entrance' ? 'Entrance' : `Checkpoint ${lbl}`;
+      triggerCheckpointAt(currentWP);
+    }
   }
+
+  if(snapping){
+    snapT = Math.min(1, snapT + dt/SNAP_DUR);
+    camA = lerpAngle(snapFrom, snapTarget, easeInOut(snapT));
+    if(snapT >= 1){
+      camA = snapTarget;
+      snapping = false;
+      setButtonsEnabled(true);
+    }
+  }
+
   renderFrame();
   requestAnimationFrame(gameLoop);
 }
-
-// ===== TAP ZONE CONTROLS =====
-// Each zone sets a flag on touchstart and clears on touchend/cancel
-// so holding your finger = continuous movement
-function bindZone(id, key){
-  const el = document.getElementById(id);
-  el.addEventListener('touchstart', e=>{ e.preventDefault(); keys[key]=true;  }, {passive:false});
-  el.addEventListener('touchend',   e=>{ e.preventDefault(); keys[key]=false; }, {passive:false});
-  el.addEventListener('touchcancel',e=>{ e.preventDefault(); keys[key]=false; }, {passive:false});
-  // Also support mouse for desktop testing
-  el.addEventListener('mousedown', ()=>keys[key]=true);
-  el.addEventListener('mouseup',   ()=>keys[key]=false);
-  el.addEventListener('mouseleave',()=>keys[key]=false);
-}
-
-// Keyboard support (desktop / keyboard cover)
-document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowUp'||e.key==='w')    keys.forward=true;
-  if(e.key==='ArrowDown'||e.key==='s')  keys.back=true;
-  if(e.key==='ArrowLeft'||e.key==='a')  keys.left=true;
-  if(e.key==='ArrowRight'||e.key==='d') keys.right=true;
-});
-document.addEventListener('keyup',e=>{
-  if(e.key==='ArrowUp'||e.key==='w')    keys.forward=false;
-  if(e.key==='ArrowDown'||e.key==='s')  keys.back=false;
-  if(e.key==='ArrowLeft'||e.key==='a')  keys.left=false;
-  if(e.key==='ArrowRight'||e.key==='d') keys.right=false;
-});
 
 function buildHUD(){
   const row=document.getElementById('cp-row');
@@ -691,27 +690,22 @@ function enterMaze(){
   setTimeout(()=>{
     document.getElementById('entry-screen').style.display='none';
     document.getElementById('maze-container').classList.add('active');
-    document.getElementById('controls').classList.add('active');
     document.getElementById('hud').classList.remove('hidden');
+    document.getElementById('arrow-pad').classList.add('active');
     buildHUD(); resize();
-    // Bind tap zones after controls are visible
-    bindZone('tap-forward','forward');
-    bindZone('tap-left','left');
-    bindZone('tap-right','right');
-    bindZone('tap-back','back');
     running=true; lastTime=performance.now();
     requestAnimationFrame(gameLoop);
   },1500);
 }
 
 function resetMaze(){
-  px=1.5;py=1.5;angle=0;cpReached=0;gameOver=false;
-  Object.keys(keys).forEach(k=>keys[k]=false);
-  CHECKPOINTS.forEach(cp=>cp.reached=false);
+  camX=WAYPOINTS[0].x; camY=WAYPOINTS[0].y; camA=WAYPOINTS[0].angle;
+  currentWP=0; travelling=false; snapping=false; gameOver=false; cpReached=0;
   document.getElementById('win-screen').classList.remove('show');
   document.getElementById('win-particles').innerHTML='';
   document.getElementById('current-location').textContent='Entrance';
   document.querySelectorAll('.cp-dot').forEach(d=>d.classList.remove('reached'));
+  setButtonsEnabled(true);
   running=true; lastTime=performance.now();
   requestAnimationFrame(gameLoop);
 }
